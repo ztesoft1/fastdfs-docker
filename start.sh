@@ -2,7 +2,7 @@
 #set -e
 if [ "$1" = "monitor" ] ; then
   if [ -n "$TRACKER_SERVER" ] ; then  
-    sed -i "s|tracker_server=.*$|tracker_server=${TRACKER_SERVER}|g" /etc/fdfs/client.conf
+    sed -i "s|tracker_server=.*$|tracker_server=${TRACKER_SERVER}|g" /home/software/fdfs/client.conf
   fi
   fdfs_monitor /etc/fdfs/client.conf
   exit 0
@@ -13,19 +13,19 @@ else
 fi
 
 if [ -n "$PORT" ] ; then  
-sed -i "s|^port=.*$|port=${PORT}|g" /etc/fdfs/"$FASTDFS_MODE".conf
+sed -i "s|^port=.*$|port=${PORT}|g" /home/software/fdfs/"$FASTDFS_MODE".conf
 fi
 
 if [ -n "$TRACKER_SERVER" ] ; then  
 
-sed -i "s|tracker_server=.*$|tracker_server=${TRACKER_SERVER}|g" /etc/fdfs/storage.conf
-sed -i "s|tracker_server=.*$|tracker_server=${TRACKER_SERVER}|g" /etc/fdfs/client.conf
+sed -i "s|tracker_server=.*$|tracker_server=${TRACKER_SERVER}|g" /home/software/fdfs/storage.conf
+sed -i "s|tracker_server=.*$|tracker_server=${TRACKER_SERVER}|g" /home/software/fdfs/client.conf
 
 fi
 
 if [ -n "$GROUP_NAME" ] ; then  
 
-sed -i "s|group_name=.*$|group_name=${GROUP_NAME}|g" /etc/fdfs/storage.conf
+sed -i "s|group_name=.*$|group_name=${GROUP_NAME}|g" /home/software/fdfs/storage.conf
 
 fi 
 
@@ -37,7 +37,7 @@ if [ -f "$FASTDFS_LOG_FILE" ]; then
 	rm "$FASTDFS_LOG_FILE"
 fi
 # start the fastdfs node.	
-fdfs_${FASTDFS_MODE}d /etc/fdfs/${FASTDFS_MODE}.conf start
+fdfs_${FASTDFS_MODE}d /home/software/fdfs/${FASTDFS_MODE}.conf start
 
 # wait for pid file(important!),the max start time is 5 seconds,if the pid number does not appear in 5 seconds,start failed.
 TIMES=5
